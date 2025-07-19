@@ -1,0 +1,27 @@
+[
+  {
+    "image": "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=715&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "name": "T-Shirt",
+    "price": 499
+  },
+  {
+    "image": "https://images.unsplash.com/photo-1714143136385-c449be6760f6?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "name": "Blue Jeans",
+    "price": 1499
+  },
+  {
+    "image": "https://images.unsplash.com/photo-1723740240701-a9fbf7719fe8?q=80&w=910&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "name": "Running Shoes",
+    "price": 2199
+  },
+  {
+    "image": "https://images.unsplash.com/photo-1723961617032-ef69c454cb31?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "name": "Wireless Headphones",
+    "price": 2999
+  },
+  {
+    "image": "https://images.unsplash.com/photo-1549972574-8e3e1ed6a347?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "name": "Watch",
+    "price": 1199
+  }
+]
