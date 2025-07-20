@@ -107,6 +107,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 top: 8,
                                 right: 8,
                                 child: FloatingActionButton.small(
+                                  heroTag: "fab_$index",
                                   backgroundColor: Colors.transparent,
                                   elevation: 0,
                                   onPressed: () {},
