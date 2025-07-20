@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:e_commerce_app/global_colors.dart';
+import 'package:e_commerce_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -41,7 +42,7 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0),
         child: FutureBuilder(
           future: fetchProducts(),
           builder: (context, snapshot) {
@@ -64,77 +65,105 @@ class _ProductScreenState extends State<ProductScreen> {
               padding: EdgeInsets.zero,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 12.0,
-                crossAxisSpacing: 12.0,
-                childAspectRatio: 0.7,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+                childAspectRatio: 0.76,
               ),
               itemBuilder: (context, index) {
                 final Map<String, dynamic> product = productData[index];
 
-                return Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-
-                  elevation: 3,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.network(
-                            product["image"],
-                            fit: BoxFit.cover,
-                            width: double.infinity,
-                            height: 120,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Icon(Icons.broken_image),
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      RouteManager.productDetail,
+                      arguments: product["id"],
+                    );
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    elevation: 2,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 6.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  product["image"],
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                  height: 120,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Icon(Icons.broken_image),
+                                ),
+                              ),
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: FloatingActionButton.small(
+                                  backgroundColor: Colors.transparent,
+                                  elevation: 0,
+                                  onPressed: () {},
+                                  child: Icon(
+                                    Icons.favorite_border,
+                                    color: favColor,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
 
-                        SizedBox(height: 8),
+                          SizedBox(height: 10),
 
-                        Text(
-                          product["name"],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-
-                        SizedBox(height: 4),
-
-                        Text(
-                          "₹${product["price"]}",
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: primary,
-                          ),
-                        ),
-                        Spacer(),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
-                              backgroundColor: primary,
-                              padding: EdgeInsets.zero,
+                          Text(
+                            product["name"],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
                             ),
-                            onPressed: () {
-                              print("pressed");
-                            },
-                            child: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 20,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+
+                          SizedBox(height: 4),
+
+                          Text(
+                            "₹${product["price"]}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: primary,
                             ),
                           ),
-                        ),
-                      ],
+                          Spacer(),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: CircleBorder(),
+                                  backgroundColor: primary,
+                                  padding: EdgeInsets.zero,
+                                  minimumSize: Size(36, 36),
+                                ),
+                                onPressed: () {
+                                  print("pressed");
+                                },
+                                child: Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
