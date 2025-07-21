@@ -55,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     "Cart",
                     style: TextStyle(
                       color: gold,
-                      fontSize: 26,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -69,7 +69,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                 ),
               ),
-
+              profileMenu(
+                title: "Orders",
+                setIcon: Icons.shopping_basket,
+                onTap: () {},
+              ),
               profileMenu(
                 title: "Profile",
                 setIcon: Icons.person,
