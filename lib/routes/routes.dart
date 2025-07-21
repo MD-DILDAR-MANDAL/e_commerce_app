@@ -1,10 +1,12 @@
 import 'package:e_commerce_app/index/navigation_manager.dart';
+import 'package:e_commerce_app/pages/cart_screen.dart';
 import 'package:e_commerce_app/pages/product_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteManager {
   static const String navigationManager = "/";
   static const String productDetail = '/productDetail';
+  static const cartScreen = "/cartScreen";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var data;
@@ -20,6 +22,8 @@ class RouteManager {
         return MaterialPageRoute(
           builder: (context) => ProductDetailScreen(id: data),
         );
+      case cartScreen:
+        return MaterialPageRoute(builder: (context) => CartScreen());
       default:
         throw FormatException("ROute not Found! Check route again!");
     }

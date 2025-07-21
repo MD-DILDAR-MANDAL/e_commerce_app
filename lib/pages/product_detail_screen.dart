@@ -89,7 +89,7 @@ Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots 
                     padding: const EdgeInsets.fromLTRB(14, 8, 14, 8),
                     child: Text(
                       "Buy Now",
-                      style: TextStyle(color: Colors.white, fontSize: 24),
+                      style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
                   ),
                 ),
