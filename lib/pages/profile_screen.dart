@@ -11,7 +11,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final String profileImage =
-      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-clipart%2F20190924%2Foriginal%2Fpngtree-business-people-avatar-icon-user-profile-free-vector-png-image_4815126.jpg&f=1&nofb=1&ipt=781cdc69f6d29142fce91137b463607ab8af1e2cc0205716cc7d016cb0ba1ffb";
+      "https://images.unsplash.com/photo-1545238377-dee9b7db2414?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   final String userName = "Mark Adam";
   final String userMail = "mark@gmail.com";
 

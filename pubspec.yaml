@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   carousel_slider: ^5.1.1
   http: ^1.4.0
+  supabase_flutter: ^2.9.1
+  flutter_dotenv: ^5.2.1
 
 dev_dependencies:
   flutter_test:
@@ -20,3 +22,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - .env

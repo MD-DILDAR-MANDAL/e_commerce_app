@@ -1,7 +1,16 @@
 import 'package:e_commerce_app/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+  await Supabase.initialize(
+    url: dotenv.env['Project_Url'] ?? 'default_key',
+    anonKey: dotenv.env['Anon_Key'] ?? 'default_key',
+  );
+
   runApp(const MyApp());
 }
 
