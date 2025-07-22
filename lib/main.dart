@@ -4,13 +4,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-  await Supabase.initialize(
-    url: dotenv.env['Project_Url'] ?? 'default_key',
-    anonKey: dotenv.env['Anon_Key'] ?? 'default_key',
-  );
+  var _url = dotenv.env['project_url']!;
+  var _anonKey = dotenv.env['anon_key']!;
 
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(url: _url, anonKey: _anonKey);
   runApp(const MyApp());
 }
 

@@ -1,8 +1,7 @@
-import 'dart:convert';
 import 'package:e_commerce_app/global_colors.dart';
 import 'package:e_commerce_app/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -12,19 +11,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  Future<List<Map<String, dynamic>>> fetchProducts() async {
-    final response = await http.get(
-      Uri.parse(
-        'https://raw.githubusercontent.com/MD-DILDAR-MANDAL/e_commerce_app/refs/heads/main/demo.json',
-      ),
-    );
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
-      return List<Map<String, dynamic>>.from(data);
-    } else {
-      throw Exception('Failed to load products');
-    }
-  }
+  final _future = Supabase.instance.client.from('products').select();
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +31,9 @@ class _ProductScreenState extends State<ProductScreen> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FutureBuilder(
-          future: fetchProducts(),
+          future: _future,
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+            if (!snapshot.hasData) {
               return SizedBox(
                 height: 120,
                 child: Center(child: CircularProgressIndicator()),
@@ -58,7 +45,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 child: Center(child: Text("Error: ${snapshot.error}")),
               );
             }
-            final productData = snapshot.data!;
+            final List<dynamic> productData = snapshot.data!;
 
             return GridView.builder(
               itemCount: productData.length,
@@ -77,7 +64,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     Navigator.pushNamed(
                       context,
                       RouteManager.productDetail,
-                      arguments: product["id"],
+                      arguments: product["product_id"],
                     );
                   },
                   child: Card(
@@ -95,7 +82,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
                                 child: Image.network(
-                                  product["image"],
+                                  product["image_url"],
                                   fit: BoxFit.cover,
                                   width: double.infinity,
                                   height: 120,
