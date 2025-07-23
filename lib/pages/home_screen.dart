@@ -55,33 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              TextField(
-                keyboardType: TextInputType.text,
-                controller: _searchTextController,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: const Color.fromARGB(255, 225, 225, 225),
-                  hintText: "Search here",
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Icon(Icons.search, size: 43),
-                  ),
-
-                  border: InputBorder.none,
-
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(26.0),
-                    borderSide: BorderSide(
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
-                  ),
-
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(26.0),
-                  ),
-                ),
-              ),
-
               const SizedBox(height: 15),
 
               Container(
@@ -115,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 screenWidth: screenWidth,
                 title: "Featured",
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               showCase(
                 features: features,
                 screenWidth: screenWidth,
