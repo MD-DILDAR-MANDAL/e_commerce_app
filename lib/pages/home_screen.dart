@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:e_commerce_app/global_colors.dart';
 import 'package:e_commerce_app/routes/routes.dart';
+import 'package:e_commerce_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,24 +30,44 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
     double screenWidth = MediaQuery.of(context).size.width;
+
     final List<String> imgList = [
       'https://images.unsplash.com/photo-1573855619003-97b4799dcd8b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       'https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       'https://images.unsplash.com/photo-1526178613552-2b45c6c302f0?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       'https://images.unsplash.com/photo-1573518011645-aa7ab49d0aa6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTd8fGhhcHB5JTIwc2hvcHBpbmd8ZW58MHx8MHx8fDI%3D',
     ];
+    final userId = authService.user?.id;
+    print(userId);
 
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text("Hello!", style: TextStyle(fontWeight: FontWeight.w300)),
-              Text("User", style: TextStyle(fontWeight: FontWeight.bold)),
-            ],
-          ),
+        title: FutureBuilder(
+          future: Supabase.instance.client
+              .from('customers')
+              .select('first_name')
+              .eq('customer_id', userId!)
+              .maybeSingle(),
+          builder: (context, snapshot) {
+            final customer = snapshot.data;
+            final firstName = customer?['first_name'] ?? "User";
+
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text("Hello", style: TextStyle(fontWeight: FontWeight.w300)),
+                  Text(
+                    firstName,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
         actions: [
           Padding(

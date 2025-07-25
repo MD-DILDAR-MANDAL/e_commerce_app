@@ -31,7 +31,7 @@ class AuthService with ChangeNotifier {
     _user = response.user;
 
     final insert = await _supabase.from('customers').insert({
-      'customer_id': _user?.id.toString(), // user id from auth
+      'customer_id': _user?.id, // user id from auth
       'first_name': first_name,
       'last_name': last_name,
       'email': email,
