@@ -26,6 +26,26 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  void checkLoggedIn() {
+    final currentUser = Supabase.instance.client.auth.currentUser;
+    if (currentUser != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          RouteManager.navigationManager,
+          (Route<dynamic> route) => false,
+          arguments: currentUser,
+        );
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoggedIn();
+  }
+
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
