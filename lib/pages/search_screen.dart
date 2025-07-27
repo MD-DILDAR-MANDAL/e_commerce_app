@@ -46,6 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(),
       body: GestureDetector(
@@ -95,7 +96,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("no results", style: TextStyle(fontSize: 30)),
-                        Icon(Icons.store_outlined, size: 200),
+                        Icon(Icons.store_outlined, size: screenHeight * 0.2),
                       ],
                     ),
                   )

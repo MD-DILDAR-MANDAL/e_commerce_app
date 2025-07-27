@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:e_commerce_app/global_colors.dart';
 import 'package:e_commerce_app/pages/home_screen.dart';
-import 'package:e_commerce_app/pages/product_screen.dart';
-import 'package:e_commerce_app/pages/profile_screen.dart';
+import 'package:e_commerce_app/pages/product/product_screen.dart';
+import 'package:e_commerce_app/pages/profile/profile_screen.dart';
 import 'package:e_commerce_app/pages/search_screen.dart';
 
 class NavigationManager extends StatefulWidget {

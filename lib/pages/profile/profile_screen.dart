@@ -1,12 +1,13 @@
 import 'dart:io';
 
-import 'package:e_commerce_app/global_colors.dart';
-import 'package:e_commerce_app/routes/routes.dart';
-import 'package:e_commerce_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'package:e_commerce_app/global_colors.dart';
+import 'package:e_commerce_app/routes/routes.dart';
+import 'package:e_commerce_app/service/auth_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

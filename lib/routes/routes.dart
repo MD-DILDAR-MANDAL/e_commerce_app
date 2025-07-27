@@ -1,9 +1,9 @@
-import 'package:e_commerce_app/index/navigation_manager.dart';
+import 'package:e_commerce_app/pages/index/navigation_manager.dart';
 import 'package:e_commerce_app/pages/cart_screen.dart';
 import 'package:e_commerce_app/pages/login/login_page.dart';
 import 'package:e_commerce_app/pages/login/register_page.dart';
-import 'package:e_commerce_app/pages/product_detail_screen.dart';
-import 'package:e_commerce_app/pages/profile_change_screen.dart';
+import 'package:e_commerce_app/pages/product/product_detail_screen.dart';
+import 'package:e_commerce_app/pages/profile/profile_change_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteManager {

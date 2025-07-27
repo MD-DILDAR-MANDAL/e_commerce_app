@@ -2,7 +2,6 @@ import 'package:e_commerce_app/routes/routes.dart';
 import 'package:e_commerce_app/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfileChangeScreen extends StatefulWidget {
   const ProfileChangeScreen({super.key});
