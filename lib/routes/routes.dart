@@ -1,5 +1,6 @@
+import 'package:e_commerce_app/pages/cart/checkout_screen.dart';
 import 'package:e_commerce_app/pages/index/navigation_manager.dart';
-import 'package:e_commerce_app/pages/cart_screen.dart';
+import 'package:e_commerce_app/pages/cart/cart_screen.dart';
 import 'package:e_commerce_app/pages/login/login_page.dart';
 import 'package:e_commerce_app/pages/login/register_page.dart';
 import 'package:e_commerce_app/pages/product/product_detail_screen.dart';
@@ -13,10 +14,12 @@ class RouteManager {
   static const String cartScreen = "/cartScreen";
   static const String registerPage = "/registerPage";
   static const String profileChangeScreen = '/profileChange';
+  static const String checkoutScreen = '/checkoutScreen';
+
   static Route<dynamic> generateRoute(RouteSettings settings) {
     dynamic data;
 
-    if (settings.arguments != Null) {
+    if (settings.arguments != null) {
       data = settings.arguments;
     }
 
@@ -35,6 +38,10 @@ class RouteManager {
         return MaterialPageRoute(builder: (context) => CartScreen());
       case profileChangeScreen:
         return MaterialPageRoute(builder: (context) => ProfileChangeScreen());
+      case checkoutScreen:
+        return MaterialPageRoute(
+          builder: (context) => CheckoutScreen(billData: data),
+        );
       default:
         throw FormatException("ROute not Found! Check route again!");
     }

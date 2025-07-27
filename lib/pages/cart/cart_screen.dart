@@ -1,9 +1,12 @@
-import 'package:e_commerce_app/global_colors.dart';
-import 'package:e_commerce_app/service/cart_service.dart';
-import 'package:e_commerce_app/widgets/order_summary_widget.dart';
+import 'package:e_commerce_app/modals/check_bill.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'package:e_commerce_app/global_colors.dart';
+import 'package:e_commerce_app/routes/routes.dart';
+import 'package:e_commerce_app/service/cart_service.dart';
+import 'package:e_commerce_app/widgets/order_summary_widget.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -25,6 +28,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     final cart = Provider.of<CartService>(context);
     final itemList = cart.items;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Cart", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -106,6 +110,7 @@ class _CartScreenState extends State<CartScreen> {
               discount = 0;
             }
             double total = subtotal + tax - discount;
+
             return OrderSummaryWidget(
               subtotal: subtotal,
               tax: tax,
@@ -122,7 +127,23 @@ class _CartScreenState extends State<CartScreen> {
             backgroundColor: primary,
             foregroundColor: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () {
+            double subtotal = itemList.fold(
+              0,
+              (sum, item) => sum + item.priceAtPurchase * item.quantity,
+            );
+            double tax = subtotal * 0.10;
+            double discount = subtotal == 0 ? 0 : 50;
+            double total = subtotal + tax - discount;
+
+            final billObject = CheckBill(subtotal, tax, discount, total);
+
+            Navigator.pushNamed(
+              context,
+              RouteManager.checkoutScreen,
+              arguments: billObject,
+            );
+          },
           child: Text("Check Out", style: TextStyle(fontSize: 22)),
         ),
       ),
