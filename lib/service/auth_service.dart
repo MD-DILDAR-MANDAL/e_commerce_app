@@ -5,6 +5,7 @@ class AuthService with ChangeNotifier {
   final SupabaseClient _supabase = Supabase.instance.client;
   User? _user;
   User? get user => _user;
+  String? name;
 
   AuthService() {
     _user = _supabase.auth.currentUser;
@@ -12,6 +13,18 @@ class AuthService with ChangeNotifier {
       _user = data.session?.user;
       notifyListeners();
     });
+  }
+
+  Future getUserData() async {
+    if (user != null) {
+      final data = await _supabase
+          .from('customers')
+          .select('first_name')
+          .eq('customer_id', user!.id)
+          .single();
+      name = data["first_name"];
+    }
+    notifyListeners();
   }
 
   Future<void> signUp(

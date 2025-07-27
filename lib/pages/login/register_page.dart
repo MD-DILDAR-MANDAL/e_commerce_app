@@ -209,7 +209,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               true) {
                             msg = "Invalid email format";
                           } else {
-                            msg = e.message ?? msg;
+                            msg = e.message;
                           }
 
                           ScaffoldMessenger.of(context).showSnackBar(

@@ -160,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                               true) {
                             msg = "User  not registered";
                           } else {
-                            msg = e.message ?? msg;
+                            msg = e.message;
                           }
 
                           ScaffoldMessenger.of(context).showSnackBar(

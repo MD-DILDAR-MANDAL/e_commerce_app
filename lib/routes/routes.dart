@@ -3,6 +3,7 @@ import 'package:e_commerce_app/pages/cart_screen.dart';
 import 'package:e_commerce_app/pages/login/login_page.dart';
 import 'package:e_commerce_app/pages/login/register_page.dart';
 import 'package:e_commerce_app/pages/product_detail_screen.dart';
+import 'package:e_commerce_app/pages/profile_change_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteManager {
@@ -11,7 +12,7 @@ class RouteManager {
   static const String productDetail = '/productDetail';
   static const String cartScreen = "/cartScreen";
   static const String registerPage = "/registerPage";
-
+  static const String profileChangeScreen = '/profileChange';
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var data;
 
@@ -32,7 +33,8 @@ class RouteManager {
         );
       case cartScreen:
         return MaterialPageRoute(builder: (context) => CartScreen());
-
+      case profileChangeScreen:
+        return MaterialPageRoute(builder: (context) => ProfileChangeScreen());
       default:
         throw FormatException("ROute not Found! Check route again!");
     }

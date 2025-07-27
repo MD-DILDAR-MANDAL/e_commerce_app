@@ -171,7 +171,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               setIcon: Icons.shopping_basket,
               onTap: () {},
             ),
-            profileMenu(title: "Profile", setIcon: Icons.person, onTap: () {}),
+            profileMenu(
+              title: "Profile",
+              setIcon: Icons.person,
+              onTap: () {
+                Navigator.pushNamed(context, RouteManager.profileChangeScreen);
+              },
+            ),
             profileMenu(
               title: "Settings",
               setIcon: Icons.settings,

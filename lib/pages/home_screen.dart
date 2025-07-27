@@ -46,14 +46,29 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: FutureBuilder(
-          future: Supabase.instance.client
-              .from('customers')
-              .select('first_name')
-              .eq('customer_id', userId!)
-              .maybeSingle(),
+          future: userId == null
+              ? Future.value(null)
+              : Supabase.instance.client
+                    .from('customers')
+                    .select('first_name')
+                    .eq('customer_id', userId)
+                    .single(),
           builder: (context, snapshot) {
-            final customer = snapshot.data;
-            final firstName = customer?['first_name'] ?? "User";
+            if (userId == null) {
+              return Text('No user logged in');
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
+            }
+            if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            }
+            if (!snapshot.hasData || snapshot.data == null) {
+              return Text('No data found');
+            }
+            final Map<String, dynamic> customer =
+                snapshot.data as Map<String, dynamic>;
+            final firstName = customer['first_name'] ?? "User";
 
             return Padding(
               padding: const EdgeInsets.all(8.0),
