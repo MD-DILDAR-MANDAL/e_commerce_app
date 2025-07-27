@@ -1,6 +1,8 @@
 import 'package:e_commerce_app/global_colors.dart';
 import 'package:e_commerce_app/routes/routes.dart';
+import 'package:e_commerce_app/service/cart_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -16,7 +18,7 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-
+    final cart = Provider.of<CartService>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -141,6 +143,10 @@ class _ProductScreenState extends State<ProductScreen> {
                                 ),
                                 onPressed: () {
                                   print("pressed");
+                                  cart.addItem(
+                                    product['product_id'],
+                                    product['price'],
+                                  );
                                 },
                                 child: Icon(
                                   Icons.add,
