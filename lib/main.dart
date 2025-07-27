@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'package:e_commerce_app/routes/routes.dart';
 import 'package:e_commerce_app/service/auth_service.dart';
 import 'package:e_commerce_app/service/cart_service.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");

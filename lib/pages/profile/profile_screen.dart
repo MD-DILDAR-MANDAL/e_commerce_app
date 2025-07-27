@@ -46,13 +46,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
               .update({'profile_image_url': uploadedUrl})
               .eq('customer_id', userId);
           if (update != null) {
-            print("failed to update profile image url in database");
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "failed to update profile image url in database",
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: Colors.red,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
           } else {
-            print("profile image updated successfully");
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "profile image updated successfully",
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: primary,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
           }
         }
       } else {
-        print("image upload failed");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              "image upload failed",
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
       }
     }
   }
@@ -63,7 +90,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final fileBytes = await image.readAsBytes();
     final fileExt = image.path.split('.').last;
     if (fileExt != 'jpg' && fileExt != 'jpeg' && fileExt != 'png') {
-      print("Invalid file type. Only JPG and PNG are allowed.");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Invalid file type. Only JPG and PNG are allowed.",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
       return null;
     }
 
@@ -83,7 +119,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .getPublicUrl(filePath);
       return imageUrl;
     } else {
-      print('Upload error');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Upload error", style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
       return null;
     }
   }
@@ -113,7 +155,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(profileImageUrl);
     return Scaffold(
       appBar: AppBar(),
       body: Padding(

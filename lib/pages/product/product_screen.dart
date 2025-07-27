@@ -1,9 +1,10 @@
-import 'package:e_commerce_app/global_colors.dart';
-import 'package:e_commerce_app/routes/routes.dart';
-import 'package:e_commerce_app/service/cart_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'package:e_commerce_app/global_colors.dart';
+import 'package:e_commerce_app/routes/routes.dart';
+import 'package:e_commerce_app/service/cart_service.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({super.key});
@@ -142,10 +143,19 @@ class _ProductScreenState extends State<ProductScreen> {
                                   minimumSize: Size(36, 36),
                                 ),
                                 onPressed: () {
-                                  print("pressed");
                                   cart.addItem(
                                     product['product_id'],
                                     product['price'],
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Item added to the cart",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      backgroundColor: primary,
+                                      behavior: SnackBarBehavior.floating,
+                                    ),
                                   );
                                 },
                                 child: Icon(

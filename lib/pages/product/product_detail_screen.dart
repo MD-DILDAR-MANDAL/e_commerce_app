@@ -1,5 +1,7 @@
 import 'package:e_commerce_app/global_colors.dart';
+import 'package:e_commerce_app/service/cart_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -22,6 +24,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartService>(context);
+
     return Scaffold(
       appBar: AppBar(
         actionsPadding: EdgeInsets.all(8.0),
@@ -122,7 +126,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
                       onPressed: () {
-                        print("pressed");
+                        cart.addItem(product['product_id'], product['price']);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              "Item added to the cart",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: primary,
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
                       },
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),

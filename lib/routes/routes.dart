@@ -14,7 +14,7 @@ class RouteManager {
   static const String registerPage = "/registerPage";
   static const String profileChangeScreen = '/profileChange';
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    var data;
+    dynamic data;
 
     if (settings.arguments != Null) {
       data = settings.arguments;

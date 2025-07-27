@@ -10,7 +10,7 @@ class CartService with ChangeNotifier {
   List<CartItem> _items = [];
   List<CartItem> get items => List.unmodifiable(_items);
 
-  Future<String?> getOrCreateCartOrderId() async {
+  Future<int?> getOrCreateCartOrderId() async {
     final userId = _userId;
     if (userId == null) return null;
     final rows = await _supabase
@@ -71,7 +71,7 @@ class CartService with ChangeNotifier {
       final newAdd = newItem.toJson(userId);
       await _supabase.from('order_items').insert({
         'order_id': orderId,
-        'product_id': newAdd['productId'],
+        'product_id': newAdd['product_id'],
         'quantity': newAdd['quantity'],
         'price_at_purchase': newAdd['price_at_purchase'],
       });

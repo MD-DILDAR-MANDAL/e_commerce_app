@@ -41,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
       'https://images.unsplash.com/photo-1573518011645-aa7ab49d0aa6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTd8fGhhcHB5JTIwc2hvcHBpbmd8ZW58MHx8MHx8fDI%3D',
     ];
     final userId = authService.user?.id;
-    print(userId);
 
     return Scaffold(
       appBar: AppBar(
