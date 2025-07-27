@@ -1,16 +1,16 @@
-# e_commerce_app
+# ecommerce app
 
-A new Flutter project.
+<div style="display: flex; gap: 10px;">
+  <img src="demo/d1.png" width="250"/>
+  <img src="demo/d2.png" width="250"/>
+  <img src="demo/d3.png" width="250"/>
+</div>
 
-## Getting Started
+</br>
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div>
+  <img src="demo/d4.png" width="250"/>
+  <img src="demo/d5.png" width="250"/>
+  <img src="demo/d6.png" width="250"/>
+</div>
+</br>
