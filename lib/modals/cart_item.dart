@@ -9,8 +9,7 @@ class CartItem {
     required this.priceAtPurchase,
   });
 
-  Map<String, dynamic> toJson(String userId) => {
-    'user_id': userId,
+  Map<String, dynamic> toJson() => {
     'product_id': productId,
     'quantity': quantity,
     'price_at_purchase': priceAtPurchase,

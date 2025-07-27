@@ -1,6 +1,9 @@
 import 'package:e_commerce_app/global_colors.dart';
+import 'package:e_commerce_app/service/cart_service.dart';
 import 'package:e_commerce_app/widgets/order_summary_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -10,25 +13,18 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  final List<Map<String, dynamic>> demoCartItems = [
-    {
-      "name": "Wireless Headphones",
-      "imageUrl":
-          "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=715&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "quantity": 1,
-      "price": 2999.00,
-    },
-    {
-      "name": "Watch",
-      "imageUrl":
-          "https://images.unsplash.com/photo-1549972574-8e3e1ed6a347?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "quantity": 2,
-      "price": 1199.00,
-    },
-  ];
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<CartService>(context, listen: false).fetchCart();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartService>(context);
+    final itemList = cart.items;
     return Scaffold(
       appBar: AppBar(
         title: Text("Cart", style: TextStyle(fontWeight: FontWeight.bold)),
@@ -36,41 +32,85 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: ListView.builder(
         padding: EdgeInsets.all(8.0),
-        itemCount: demoCartItems.length + 1,
+        itemCount: itemList.length + 1,
         itemBuilder: (context, index) {
-          if (index < demoCartItems.length) {
-            Map<String, dynamic> item = demoCartItems[index];
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                child: ListTile(
-                  leading: Image.network(
-                    item['imageUrl'],
-                    width: 60,
-                    height: 60,
-                    fit: BoxFit.cover,
+          if (index < itemList.length) {
+            Map<String, dynamic> item = itemList[index].toJson();
+
+            return FutureBuilder(
+              future: Supabase.instance.client
+                  .from('products')
+                  .select()
+                  .eq('product_id', item['product_id'])
+                  .single(),
+              builder: (contex, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+                if (!snapshot.hasData || snapshot.data == null) {
+                  return const Text('No product found.');
+                }
+                final response = snapshot.data!;
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    child: ListTile(
+                      leading: Image.network(
+                        response['image_url'],
+                        width: 60,
+                        height: 60,
+                        fit: BoxFit.cover,
+                      ),
+                      title: Text(
+                        response['name'],
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "Quantity: ${item['quantity']}",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      trailing: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            child: Icon(Icons.delete, color: Colors.red),
+                            onTap: () {
+                              cart.removeItem(response['product_id']);
+                            },
+                          ),
+                          Text(
+                            "₹ ${item['quantity'] * item['price_at_purchase']}",
+                            style: TextStyle(fontSize: 14, color: primary),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  title: Text(
-                    item['name'],
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(
-                    "Quantity: ${item['quantity']}",
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  trailing: Text(
-                    "₹ ${item['quantity'] * item['price']}",
-                    style: TextStyle(fontSize: 14, color: primary),
-                  ),
-                ),
-              ),
+                );
+              },
             );
           } else {
+            double subtotal = itemList.fold(
+              0,
+              (sum, item) => sum + item.priceAtPurchase * item.quantity,
+            );
+            double tax = subtotal * 0.10;
+            double discount = 50;
+            if (subtotal == 0) {
+              discount = 0;
+            }
+            double total = subtotal + tax - discount;
             return OrderSummaryWidget(
-              subtotal: 100,
-              tax: 10,
-              discount: 2,
-              total: 200,
+              subtotal: subtotal,
+              tax: tax,
+              discount: discount,
+              total: total,
             );
           }
         },

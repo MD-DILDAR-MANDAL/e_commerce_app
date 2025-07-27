@@ -68,7 +68,7 @@ class CartService with ChangeNotifier {
         quantity: 1,
         priceAtPurchase: price,
       );
-      final newAdd = newItem.toJson(userId);
+      final newAdd = newItem.toJson();
       await _supabase.from('order_items').insert({
         'order_id': orderId,
         'product_id': newAdd['product_id'],
