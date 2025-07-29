@@ -51,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
     final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           "Login",
@@ -64,10 +65,10 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            center: Alignment(-0.3, 0.3),
+            center: Alignment(-0.5, -0.1),
             radius: 1,
-            colors: <Color>[Colors.white, primary],
-            stops: <double>[0.9, 0.7],
+            colors: <Color>[triad3, primary],
+            stops: <double>[0.74, 0.5],
           ),
         ),
         child: Form(
@@ -125,8 +126,10 @@ class _LoginPageState extends State<LoginPage> {
                   ? CircularProgressIndicator()
                   : ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        shadowColor: primary,
                         backgroundColor: secondary,
                         foregroundColor: Colors.white,
+                        elevation: 6,
                       ),
                       onPressed: () async {
                         FocusScope.of(context).unfocus();
@@ -193,7 +196,10 @@ class _LoginPageState extends State<LoginPage> {
                   FocusScope.of(context).unfocus();
                   Navigator.pushNamed(context, RouteManager.registerPage);
                 },
-                child: Text("Don't have an account?"),
+                child: Text(
+                  "Don't have an account?",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),

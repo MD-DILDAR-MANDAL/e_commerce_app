@@ -35,6 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final auth = Provider.of<AuthService>(context);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           "Register",
@@ -47,13 +48,13 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            center: Alignment(0.3, 0.3), // near the top right
-            radius: 1.1,
+            center: Alignment(0.45, -0.1), // near the top right
+            radius: 1,
             colors: <Color>[
-              Colors.white, // yellow sun
+              triad3, // yellow sun
               secondary, // blue sky
             ],
-            stops: <double>[0.9, 0.7],
+            stops: <double>[0.74, 0.5],
           ),
         ),
 
@@ -157,7 +158,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: secondary,
+                        shadowColor: primary,
+                        elevation: 6,
                       ),
+
                       onPressed: () async {
                         FocusScope.of(context).unfocus();
                         final isValid = _formkey.currentState!.validate();

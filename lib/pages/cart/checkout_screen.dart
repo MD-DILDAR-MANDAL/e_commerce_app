@@ -266,7 +266,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   ) {
     var options = {
       'key': dotenv.env['razorpay_key_id'],
-      'amount': amount.toInt(),
+      'amount': (amount * 100).toInt(),
       'name': 'Ecommerce Store',
       'description': 'Order Payment',
       //'order_id': '',
