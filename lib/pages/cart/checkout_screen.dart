@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/global_colors.dart';
 import 'package:e_commerce_app/modals/check_bill.dart';
+import 'package:e_commerce_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -52,6 +53,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         Placemark place = placemarks[0];
 
         String foundAddress =
+            "${place.street}" +
+            ", " +
             "${place.locality}" +
             ", " +
             "${place.administrativeArea}" +
@@ -83,7 +86,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Stack(
       children: [
         Scaffold(
-          appBar: AppBar(title: Text('Check Out'), centerTitle: true),
+          appBar: AppBar(
+            title: Text(
+              'Check Out',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            centerTitle: true,
+          ),
           body: Padding(
             padding: EdgeInsets.all(8.0),
             child: ListView(
@@ -106,6 +115,22 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                             title: Text("current location"),
                             onTap: () async {
                               await fetchGeolocation();
+                            },
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.location_on),
+                            title: Text("choose on map"),
+                            onTap: () async {
+                              final result = await Navigator.pushNamed(
+                                context,
+                                RouteManager.osmMapPickerScreen,
+                              );
+                              if (result != null && result is Map) {
+                                setState(() {
+                                  address = result['address'];
+                                });
+                                Navigator.pop(context);
+                              }
                             },
                           ),
                         ],

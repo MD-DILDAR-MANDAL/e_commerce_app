@@ -5,6 +5,7 @@ import 'package:e_commerce_app/pages/login/login_page.dart';
 import 'package:e_commerce_app/pages/login/register_page.dart';
 import 'package:e_commerce_app/pages/product/product_detail_screen.dart';
 import 'package:e_commerce_app/pages/profile/profile_change_screen.dart';
+import 'package:e_commerce_app/widgets/osm_map_picker_screen.dart';
 import 'package:flutter/material.dart';
 
 class RouteManager {
@@ -15,6 +16,7 @@ class RouteManager {
   static const String registerPage = "/registerPage";
   static const String profileChangeScreen = '/profileChange';
   static const String checkoutScreen = '/checkoutScreen';
+  static const String osmMapPickerScreen = '/osmMapPickerScreen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     dynamic data;
@@ -42,6 +44,9 @@ class RouteManager {
         return MaterialPageRoute(
           builder: (context) => CheckoutScreen(billData: data),
         );
+      case osmMapPickerScreen:
+        return MaterialPageRoute(builder: (context) => OsmMapPickerScreen());
+
       default:
         throw FormatException("ROute not Found! Check route again!");
     }

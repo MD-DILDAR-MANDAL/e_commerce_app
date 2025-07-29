@@ -47,6 +47,7 @@ class CartService with ChangeNotifier {
         .select()
         .eq('order_id', orderId);
     _items = (res as List).map((e) => CartItem.fromJson(e)).toList();
+    notifyListeners();
   }
 
   Future<void> addItem(int productId, double price) async {
