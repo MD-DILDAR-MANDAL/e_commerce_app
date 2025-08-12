@@ -1,6 +1,6 @@
 # ecommerce app
 
-<!-- livedemo : [Link](https://x.com/m_dildar_m/status/1948798695488848001) -->
+[🔗Watch live demo](https://www.youtube.com/shorts/BDC9ujk8LoA)
 
 <div style="display: flex; gap: 10px;">
   <img src="demo/d1.png" width="250"/>
