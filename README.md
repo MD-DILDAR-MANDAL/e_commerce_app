@@ -1,6 +1,4 @@
-<p align="center">
-  <h1>ecommerce_app</h1>
-</p>
+# ecommerce_app
 
 This is a responsive e-commerce app with Supabase authentication, database, and storage for profile picture and products. Includes add to cart, product search, and map-based address selection for delivery. For payment added Razorpay. Tried to keep scalable modular codebase with Provider state management and robust error handling as much as possible
 
